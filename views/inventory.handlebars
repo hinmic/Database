@@ -1,0 +1,77 @@
+<html>
+<a href="/index.html">Go Back to Home</a>
+<h1>Inventory</h1>
+<h3>Add New Item:</h3>
+<form id="addItem" action="/inventory" method="post">
+    Item:       <input type="text" name="itemName" id="itemName"><br>
+    Price:      <input  type="number" name="itemPrice" step=".01" id="itemPrice"><br>
+    Quantity: <input type="number" name="itemQuantity" id="itemQuantity"><br>
+    <input type="submit" value="Submit" onClick="return empty()">
+ </form>
+<br/>
+
+<form id='filterItemID' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by Item ID</label>
+    <select id='itemIDFilter' name="itemID"> 
+        {{#each inventory}}
+        <option value="{{itemID}}">{{itemID}}</option>
+        {{/each}}
+    </select><br>
+    <input type="button" value="Filter" onclick="filterInventoryByID()">
+    <a href="/inventory">Remove Filter</a>
+</form>
+</br>
+<form id='searchItem' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Search Item by Name:</label>
+    <input id='item_name_search_string' type='text' name='item_name_search_string' value='Ball'>
+    <input type="button" value="Search" onclick="searchInventoryByName()">
+    <a href="/inventory">Undo Search</a>
+</form>
+
+<h3>Current Inventory:</h3>
+<table>
+    <thead> 
+        <th>ID</th> 
+        <th>Name</th> 
+        <th>Price</th>
+        <th>Quantity</th>
+    </thead> 
+    <tbody>
+        {{#each inventory}} 
+        <tr> 
+            <td>{{itemID}}</td>  
+            <td>{{itemName}}</td>
+            <td>{{itemPrice}}</td>
+            <td>{{itemQuantity}}</td>
+            <td><button onclick="deleteItem({{itemID}})">Delete</button></td>
+            <td><a href="/inventory/{{itemID}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table> 
+
+<script>
+    function empty() {
+        var val = document.getElementById("itemName").value;
+        if(val == "") {
+            alert("Item name is required.");
+            return false;
+        };
+
+        val = document.getElementById("itemPrice").value;
+        if(val == "") {
+            alert("Price is required.");
+            return false;
+        };
+
+        val = document.getElementById("itemQuantity").value;
+        if(val == "") {
+            alert("Quantity is required.");
+            return false;
+        };
+    }
+</script>
+
+</html>

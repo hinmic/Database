@@ -1,0 +1,8 @@
+<html>
+<h1>Update {{customer.custFirstName}} {{customers.custLastName}}:</h1>
+<form id="update-customer" action="/customers" method="post">
+    First name: <input type="text" name="custFirstName" value="{{customer.custFirstName}}"><br>
+    Last name: <input type="text" name="custLastName" value="{{customer.custLastName}}"><br>
+</form>
+<button onclick="updateCustomer({{customer.custID}})">Update</button>
+</html>

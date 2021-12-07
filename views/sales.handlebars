@@ -1,0 +1,85 @@
+<html>
+<a href="/index.html">Go Back to Home</a>
+<h1>Sales</h1>
+<h3>Add New Item:</h3>
+<form id="addSale" action="/sales" method="post">
+    <label>Item Name</label>
+    <select id='itemSelector' name="itemID" onchange="getMax()">
+        {{#each inventory}}
+        <option id="{{itemQuantity}}" value="{{itemID}}">{{itemName}} Max:{{itemQuantity}}</option>
+        {{/each}}
+    </select><br>
+    Quantity: <input id= "saleQuantity" type="number" name="saleQuantity" max><br>
+    Date: <input type="date" name="saleDate" id="saleDate"><br>
+    <label>Employee Name</label>
+    <select id='empSelector' name="empID">
+        {{#each employees}}
+        <option value="{{empID}}">{{empFirstName}} {{empLastName}}</option>
+        {{/each}}
+    </select><br>
+    <label>Customer Name</label>
+    <select id='custSelector' name="custID">
+        {{#each customers}}
+        <option value="{{custID}}">{{custFirstName}} {{custLastName}}</option>
+        {{/each}}
+    </select><br>
+    <input type="submit" value="Submit" onClick="return empty()">
+ </form>
+<br/>
+
+<form id='filterSaleID' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by Sale ID</label>
+    <select id='saleIDFilter' name="saleID" onchange="getMax()"> 
+        {{#each sales}}
+        <option value="{{saleID}}">{{saleID}}</option>
+        {{/each}}
+    </select><br>
+    <input type="button" value="Filter" onclick="filterSalesByID()">
+    <a href="/sales">Remove Filter</a>
+</form>
+</br>
+
+<h3>Current Sales:</h3>
+<table>
+    <thead> 
+        <th>ID</th>
+        <th>Quantity</th>
+        <th>Date</th>
+        <th>Employee ID</th>
+        <th>Customer ID</th>
+        <th>Total</th>
+    </thead> 
+    <tbody>
+        {{#each sales}} 
+        <tr> 
+            <td>{{saleID}}</td>
+            <td>{{saleQuantity}}</td>
+            <td>{{saleDate}}</td>
+            <td>{{saleEmpID}}</td>
+            <td>{{saleCustID}}</td>
+            <td>{{saleTotal}}</td>
+            <td><button onclick="deleteSale({{saleID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table> 
+<script>
+    getMax()
+    function getMax(){
+        var ddl = document.getElementById('itemSelector');
+        var val = ddl.options[ddl.selectedIndex].id;
+        console.log(val) 
+        document.getElementById("saleQuantity").max = val;
+        document.getElementById("saleQuantity").min = '1';
+    }
+
+    function empty(){
+        var val = document.getElementById("saleDate").value;
+        if(val == "") {
+            alert("Date is required.");
+            return false;
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,19 @@
+<html>
+<a href="/index.html">Go Back to Home</a>
+<h1>Inventory-Sales</h1>
+<h3>Current Inventory-Sales:</h3>
+<table>
+    <thead> 
+        <th>Sale ID</th>
+        <th>Item ID</th>
+    </thead> 
+    <tbody>
+        {{#each inventorysales}} 
+        <tr> 
+            <td>{{saleID}}</td>
+            <td>{{itemID}}</td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table> 
+</html>

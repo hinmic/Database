@@ -1,0 +1,68 @@
+<html>
+<a href="/index.html">Go Back to Home</a>
+<h1>Customers</h1>
+<h3>Add New Customers:</h3>
+<form id="addCustomer" action="/customers" method="post">
+    First name: <input type="text" name="custFirstName" id="custFirstName"><br>
+    Last name: <input type="text" name="custLastName" id="custLastName"><br>
+    <input type="submit" value="Submit" onClick="return empty()">
+ </form>
+<br/>
+
+<form id='filterCustID' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by Customer ID</label>
+    <select id='custIDFilter' name="custID"> 
+        {{#each customers}}
+        <option value="{{custID}}">{{custID}}</option>
+        {{/each}}
+    </select><br>
+    <input type="button" value="Filter" onclick="filterCustomerByID()">
+    <a href="/customers">Remove Filter</a>
+</form>
+</br>
+<form id='searchCustomers' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Search Customers by First Name:</label>
+    <input id='first_name_search_string' type='text' name='first_name_search_string' value='John'>
+    <input type="button" value="Search" onclick="searchCustomersByFirstName()">
+    <a href="/customers">Undo Search</a>
+</form>
+
+<h3>Current customers:</h3>
+<table>
+    <thead> 
+        <th>ID</th> 
+        <th>First Name</th> 
+        <th>Last Name</th>  
+    </thead> 
+    <tbody>
+        {{#each customers}} 
+        <tr> 
+            <td>{{custID}}</td>  
+            <td>{{custFirstName}}</td> 
+            <td>{{custLastName}}</td>
+            <td><button onclick="deleteCustomer({{custID}})">Delete</button></td>
+            <td><a href="/customers/{{custID}}">Update</a></td>
+        </tr> 
+        {{/each}} 
+    </tbody> 
+</table> 
+
+<script>
+    function empty() {
+        var val = document.getElementById("custFirstName").value;
+        if(val == "") {
+            alert("Customer's first name is required.");
+            return false;
+        };
+
+        val = document.getElementById("custLastName").value;
+        if(val == "") {
+            alert("Customer's last name is required.");
+            return false;
+        };
+    }
+</script>
+
+</html>

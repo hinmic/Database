@@ -1,0 +1,85 @@
+<html>
+<a href="/index.html">Go Back to Home</a>
+<h1>Employees</h1>
+<h3>Add New Employees:</h3>
+<form id="addEmployee" action="/employees" method="post">
+    First name: <input type="text" name="empFirstName" id="empFirstName"><br>
+    Last name: <input type="text" name="empLastName" id="empLastName"><br>
+    Pay: <input  type="number" name="empPay" step=".01" id="empPay"><br>
+    Employee Start Date: <input type="date" name="empStart" id="empStart"><br>
+    <input type="submit" value="Submit" onClick="return empty()">
+ </form>
+<br/>
+
+<form id='filterEmpID' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by Employee ID</label>
+    <select id='empIDFilter' name="empID"> 
+        {{#each employees}}
+        <option value="{{empID}}">{{empID}}</option>
+        {{/each}}
+    </select><br>
+    <input type="button" value="Filter" onclick="filterEmployeeByID()">
+    <a href="/employees">Remove Filter</a>
+</form>
+</br>
+<form id='searchEmployee' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Search Employee by First Name:</label>
+    <input id='first_name_search_string' type='text' name='first_name_search_string' value='John'>
+    <input type="button" value="Search" onclick="searchEmployeesByFirstName()">
+    <a href="/employees">Undo Search</a>
+</form>
+
+<h3>Current Employees:</h3>
+<table>
+    <thead> 
+        <th>ID</th> 
+        <th>First Name</th> 
+        <th>Last Name</th>
+        <th>Pay</th>
+        <th>Employee Start</th>
+    </thead> 
+    <tbody>
+        {{#each employees}} 
+        <tr> 
+            <td>{{empID}}</td>  
+            <td>{{empFirstName}}</td> 
+            <td>{{empLastName}}</td>
+            <td>{{empPay}}</td>
+            <td>{{empStart}}</td>
+            <td><button onclick="deleteEmployee({{empID}})">Delete</button></td>
+            <td><a href="/employees/{{empID}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table> 
+
+<script>
+    function empty() {
+        var val = document.getElementById("empFirstName").value;
+        if(val == "") {
+            alert("Employee's first name is required.");
+            return false;
+        };
+
+        val = document.getElementById("empLastName").value;
+        if(val == "") {
+            alert("Employee's last name is required.");
+            return false;
+        };
+
+        val = document.getElementById("empPay").value;
+        if(val == "") {
+            alert("Employee's salary is required.");
+            return false;
+        };
+
+        val = document.getElementById("empStart").value;
+        if(val == "") {
+            alert("Employee's starting date is required.");
+            return false;
+        };
+    }
+</script>
+</html>

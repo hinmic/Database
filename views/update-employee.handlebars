@@ -1,0 +1,11 @@
+<html>
+<h1>Update {{employee.empFirstName}} {{employee.empLastName}} {{employee.empPay}} {{employee.empStart}}:</h1>
+<form id="update-employee" action="/employee" method="post">
+    First name: <input type="text" name="empFirstName" value="{{employee.empFirstName}}"><br>
+    Last name: <input type="text" name="empLastName" value="{{employee.empLastName}}"><br>
+    Employee Pay: <input type="number" name="empPay" value="{{employee.empPay}}"><br>
+    Employee Start: <input type="date" name="empStart" value="{{employee.empLastName}}"><br>
+
+</form>
+<button onclick="updateEmployee({{employee.empID}})">Update</button>
+</html>
