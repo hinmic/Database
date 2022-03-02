@@ -1,3 +1,1 @@
-# CS290-Server-Side-Examples
-
-This sample application requires the database dump **bsg_db.sql** to be setup *before* you can run the application. This is different from the database dump you used in other weeks of the CS340 class.
+The site of this project is no longer active on the net due to termination of database resources provided by the University. You may check display_archived to briefly understand how the code functions.
